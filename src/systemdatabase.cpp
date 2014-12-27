@@ -41,7 +41,7 @@ void SystemDatabase::open()
         bool copySuccess = QFile::copy( QString("assets:/systemdatabase.db"), path );
         if ( !copySuccess )
         {
-            qFatal("Fail to copy database", qPrintable(path));
+            qFatal("Fail to copy database");
         }
     }
 
