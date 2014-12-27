@@ -36,7 +36,15 @@ void SystemDatabase::open()
     db.setDatabaseName(path);
 
     if (!QFile::exists(path))
-        qFatal("%s does not exist", qPrintable(path));
+    {
+        qWarning("%s does not exist", qPrintable(path));
+        bool copySuccess = QFile::copy( QString("assets:/systemdatabase.db"), path );
+        if ( !copySuccess )
+        {
+            qFatal("Fail to copy database", qPrintable(path));
+        }
+    }
+
     if (!db.open())
         qFatal("Could not open database %s", qPrintable(db.lastError().driverText()));
 
